@@ -1,34 +1,25 @@
 import React from 'react'
-import styled from 'styled-components'
-
-
-const Container = styled.div`
-    height: 65px;
-    background-color: black;
-`
-
-const Wrapper = styled.div`
-    padding: 10px 20px;
-    display: flex; //horizontal
-    justify-content: space-between; // to create spaces between left, center and right sides 
-`
-const Left = styled.div`
-flex: 1; //to have common size for left, center and right
-`
-const Center = styled.div`flex: 1; //to have common size for left, center and right
-`
-const Right = styled.div`flex: 1; //to have common size for left, center and right
-`
-
-const Navbar = () => {
+import { NavbarContainer, Logo, Wrapper, NavExtendedContainer, NavInnerContainer, Left, Right, Img_Container, Img, NavbarLinkContainer, NavbarLink } from '../styles/Navbar.style'
+import logo from '../assets/images/logo.jpg'
+function Navbar() {
     return (
-        <Container>
-            <Wrapper>
+        <NavbarContainer>
+            <NavInnerContainer>
                 <Left>
-
+                    <Logo src={logo}></Logo>
                 </Left>
-            </Wrapper>
-        </Container>
+                <Right>
+                    <NavbarLinkContainer>
+                        <NavbarLink to="/"> HOME </NavbarLink>
+                        <NavbarLink to="/dresses"> DRESSES </NavbarLink>
+                        <NavbarLink to="/newCollection"> NEW COLLECTION </NavbarLink>
+                        <NavbarLink to="/news"> NEWS </NavbarLink>
+                        <NavbarLink to="/contact"> CONTACT US </NavbarLink>
+                    </NavbarLinkContainer>
+                </Right>
+            </NavInnerContainer>
+            <NavExtendedContainer></NavExtendedContainer>
+        </NavbarContainer>
     )
 }
 
