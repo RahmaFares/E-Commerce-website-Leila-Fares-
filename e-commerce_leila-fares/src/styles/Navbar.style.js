@@ -9,14 +9,14 @@ export const NavbarContainer = styled.nav`
     flex-direction: column;
 `
 export const Left = styled.div`
-flex: 30%; //to have common size for left, center and right
+flex: 55%; //to have common size for left, center and right
 display: flex;
 float: left;
 padding-left: 50px;
 `
 
 export const Right = styled.div`
-flex: 70%; //to have common size for left, center and right
+flex: 45%; //to have common size for left, center and right
 display: flex;
 align-items: center;
 padding-right: 5%;
@@ -45,7 +45,3 @@ export const Logo = styled.img`
 max-width: 180px;
 height: auto;
 `
-
-
-
-
