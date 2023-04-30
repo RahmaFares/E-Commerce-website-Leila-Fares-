@@ -94,8 +94,8 @@ export const ContactUsSocialIcons = styled.div`
 `;
 
 export const SocialIcon = styled.img`
-  height: 70px;
-  width: 70px;
+  height: 30px;
+  width: 30px;
   border-radius: 50%; /* set the border-radius to 50% to create a circular shape */
 `;
 
