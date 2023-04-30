@@ -50,7 +50,6 @@ export const UsefulLinksContainer = styled.div`
   width: 300px;
   text-align: center;
   color: black;
-  }
 `
 
 export const UsefulLinksText = styled.p`
