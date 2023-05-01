@@ -36,7 +36,7 @@ const Footer = () => {
         <p>5th settlement, Cairo</p>
         <p>Tarh Al-Bahr street, PortSaid, Egypt</p>
         <p>Al-Rehab Mall 1st Floor, Cairo</p>
-        <p>123-456-7890</p>
+        <p>+201008085424</p>
         <br />
         <ContactUsSocialIcons>
           <a href="https://www.facebook.com/leilaafares">

@@ -1,26 +1,59 @@
 import styled from 'styled-components';
-import bgphoto from '../assets/images/bgphoto.jpg'
+import newsbg from '../assets/images/newsbg.jpg'
 
 export const NewsContainer = styled.div`
-  background-image: url(${bgphoto});
-  background-size: cover;
-  background-position: center;
+background-image: url(${newsbg});
+background-size: cover;
+background-position: center;
+background-color: black;
+display: flex;
+flex-direction: column;
+align-items: center;
+min-height: 100vh;
 `;
 
 export const Heading = styled.h1`
-  color: white;
-  text-align: center;
+color: white;
+text-align: center;
 `;
 
 export const VideoContainer = styled.div`
-  background-color: none;
-  padding: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+`;
+
+export const VideoWrapper = styled.div`
+  width: 700px;
   max-width: 800px;
-  margin: 0 auto;
+  height: 500px;
+  margin: 20px;
+  position: relative;
+  overflow: hidden;
+
+  & > iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+
 `;
 
-export const VideoDescription = styled.p`
-  font-size: 16px;
+export const LeftColumn = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 200px;
+
 `;
 
+export const RightColumn = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 200px;
 
+`;

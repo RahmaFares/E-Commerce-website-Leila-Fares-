@@ -11,7 +11,7 @@ const ContactUS = () => {
             <GetInTouch>GET IN TOUCH</GetInTouch>
             <ContactInfo>
                 <p>Phone Number: +201008085424</p>
-                <p>Email: @gmail.com</p>
+                <p>Email: Leilaafaress@gmail.com</p>
                 <p>Address: 5th settlement, Cairo, Egypt</p>
                 <p>Address: Tarh Al-Bahr street, PortSaid, Egypt</p>
             </ContactInfo>

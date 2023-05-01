@@ -1,137 +1,55 @@
-import React, { useEffect, useState } from "react";
-import { NewsContainer, Heading, VideoContainer, VideoDescription } from '../styles/News.style'
-import YouTube from 'react-youtube';
-import { CHANNEL_ID } from '../Pages/config.js'
+import React from "react";
+import { NewsContainer, Heading, VideoWrapper, LeftColumn, RightColumn, VideoContainer, VideosContainer } from '../styles/News.style'
+import YouTube from '../components/YouTube'
+
 
 const NewsPage = () => {
-    const API_KEY = 'AIzaSyCud3vzcKMigzo7Co7plAlcPLE7bhdIUkM';
-    const CHANNEL_ID = 'UCm1nVrSaHhNWeWx2vMgpxzw';
-    const [videos, setVideos] = useState([]);
+    const videoIds = ['74L5rK7u1-A', 'pBK_ASLhnfY', 'pBK_ASLhnfY', 'pBK_ASLhnfY-t4'];
 
-    useEffect(() => {
-        const fetchVideos = async () => {
-            try {
-                const response = await fetch(
-                    `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=10`
-                );
-                const data = await response.json();
-
-                setVideos(data.items);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        fetchVideos();
-    }, []);
+    const opts = {
+        height: '100%',
+        width: '100%',
+        playerVars: {
+            autoplay: 1,
+        },
+    };
 
     return (
         <NewsContainer>
-            <Heading>NEWS</Heading>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-            <p> Here you will find all the TV programs that I have joined before and any upcoming new</p>
-
-            {videos.map((video) => (
-                <VideoContainer key={video.id}>
-                    <YouTube videoId={video.id} />
-                    <VideoDescription>This is the first tv program I joined </VideoDescription>
-                </VideoContainer>
-            ))}
+            <br />
+            <br />
+            <br />
+            <Heading> Here, You will find all the TV programs that I took part in. </Heading>
+            <Heading>I had interviews with the most famous TV presenters in Egypt, which is a great step for me.</Heading>
+            <Heading> I hope you enjoy and help my brand reach the whole world. </Heading>
+            <Heading> Thank you for being part of my success!  </Heading>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <VideoWrapper>
+                <YouTube videoId={videoIds[0]} opts={opts} />
+            </VideoWrapper>
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                <LeftColumn>
+                    <VideoWrapper>
+                        <YouTube videoId={videoIds[1]} opts={opts} />
+                    </VideoWrapper>
+                    <VideoWrapper>
+                        <YouTube videoId={videoIds[2]} opts={opts} />
+                    </VideoWrapper>
+                </LeftColumn>
+                <RightColumn>
+                    <VideoWrapper>
+                        <YouTube videoId={videoIds[3]} opts={opts} />
+                    </VideoWrapper>
+                    <VideoWrapper>
+                        <YouTube videoId={videoIds[4]} opts={opts} />
+                    </VideoWrapper>
+                </RightColumn>
+            </div>
         </NewsContainer>
     );
 };
