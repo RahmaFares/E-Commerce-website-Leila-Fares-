@@ -1,25 +1,23 @@
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Footer from './components/Footer'
-import Home from '../src/Pages/Home';
-import Carousel from './components/Carousel';
+import Footer from './components/Footer';
+import Home from './Pages/Home';
+import NewsPage from './Pages/NewsPage';
+import ContactUs from './Pages/ContactUs';
 
-const App = () => {
+
+function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
-        <Route exact path="/" component={Home} />
-        <Route path="/News" />
-        <Route path="/Contact" />
+        <Route exact path="/home" element={<Home />} />
+        <Route exact path="/news" element={<NewsPage />} />
+        <Route exact path="/contact" element={<ContactUs />} />
       </Routes>
-      <Home />
       <Footer />
     </Router>
-
-  )
-
-};
+  );
+}
 
 export default App;

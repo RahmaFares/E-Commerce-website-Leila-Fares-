@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavbarContainer, Logo, NavExtendedContainer, NavInnerContainer, Left, Right, NavbarLinkContainer, NavbarLink } from '../styles/Navbar.style'
 import logo from '../assets/images/logo.jpg'
-import Dropdown from './Dropdown' 
+import Dropdown from './Dropdown'
 
 function Navbar() {
     return (
