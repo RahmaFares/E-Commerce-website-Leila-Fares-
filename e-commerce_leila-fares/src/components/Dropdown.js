@@ -1,26 +1,46 @@
-import React, { useState } from 'react'
-import {DropdownContainer, DropdownMenu, DropdownMenuItem, OpenLinksButton, BoldItalicItem} from '../styles/Dropdown.style'
+import React, { useState, useRef, useEffect } from 'react';
+import { DropdownContainer, DropdownMenu, DropdownMenuItem, OpenLinksButton, BoldItalicItem } from '../styles/Dropdown.style'
+import { Link } from 'react-router-dom';
+
 
 const Dropdown = () => {
-    const [isOpen, setIsOpen] = useState(false);
-  
-    const handleDropdown = () => {
-      setIsOpen(!isOpen);
-    };
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-    return (
-        <DropdownContainer>
-            <OpenLinksButton  
-            onClick={handleDropdown}> &#8801; 
-            </OpenLinksButton>
-            <DropdownMenu open={isOpen}>
-                <BoldItalicItem>Login/Sign Up</BoldItalicItem>
-                <DropdownMenuItem href="#">Orders</DropdownMenuItem>
-                <DropdownMenuItem href="#">Messages</DropdownMenuItem>
-                <DropdownMenuItem href="#">Logout</DropdownMenuItem>
-                </DropdownMenu>
-        </DropdownContainer>
-      );
+  const handleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    // add event listener to window when component mounts
+    window.addEventListener('click', handleClickOutside);
+    // remove event listener when component unmounts
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
     };
-    
-    export default Dropdown;
+  }, []);
+
+
+  return (
+    <DropdownContainer ref={dropdownRef}>
+      <OpenLinksButton
+        onClick={handleDropdown}> &#8801;</OpenLinksButton>
+      <DropdownMenu open={isOpen}>
+        <Link to="/register">
+          <BoldItalicItem>Login/Sign Up</BoldItalicItem>
+        </Link>
+        <DropdownMenuItem href="#">Orders</DropdownMenuItem>
+        <DropdownMenuItem href="#">Messages</DropdownMenuItem>
+        <DropdownMenuItem href="#">Logout</DropdownMenuItem>
+      </DropdownMenu>
+    </DropdownContainer>
+  );
+};
+
+export default Dropdown;
