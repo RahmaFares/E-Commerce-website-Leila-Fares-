@@ -5,7 +5,7 @@ export const CarouselContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 200px;
+  height: 600px;
 `;
 
 export const SliderWrapper = styled.div`
@@ -15,10 +15,10 @@ export const SliderWrapper = styled.div`
 `;
 
 export const SliderContainer = styled.div`
-  width: 80%;
+  width: 100%;
   max-width: 800px;
-  height: 300px;
-  margin: 0 auto;
+  height: 600px;
+  //margin: 0 auto;
   overflow: hidden;
   position: relative;
 `;
@@ -35,7 +35,7 @@ export const SliderContent = styled.div`
 
 export const VideoContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 600px;
   position: relative;
   overflow: hidden;
   padding-bottom: 56.25%;
@@ -43,14 +43,14 @@ export const VideoContainer = styled.div`
 
 export const ImageSlide = styled.img`
   width: 100%;
-  height: 100%;
+  height: 600px;
   object-fit: cover;
 `;
 
 export const SlideWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 800px;
 `;
 
 export const ArrowButton = styled.button`
