@@ -14,9 +14,9 @@ width: 100%;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  position: fixed; /* Add this to keep the Navbar fixed at the top */
+  /* position: fixed; 
   top: 0;
-  z-index: 100;
+  z-index: 100; */
 `;
 
 export const NavInnerContainer = styled.div`
