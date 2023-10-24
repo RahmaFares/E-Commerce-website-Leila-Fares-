@@ -1,22 +1,23 @@
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
-const userRoute = require("./routes/user");  // Consider renaming your route
-const authRoute = require("./routes/auth");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const userRoute = require("./routes/user");
+const authRoute = require("./routes/auth");
 
 dotenv.config();
 
-if (!process.env.MONGO_URL || !process.env.STRIPE_SECRET_KEY) {
+const { MONGO_URL, STRIPE_SECRET_KEY, PORT = 5000 } = process.env;
+
+if (!MONGO_URL || !STRIPE_SECRET_KEY) {
     console.error("Missing essential environment variables. Check your .env file.");
     process.exit(1);
 }
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')(STRIPE_SECRET_KEY);
 
 mongoose
-    .connect(process.env.MONGO_URL, {
+    .connect(MONGO_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
@@ -26,26 +27,25 @@ mongoose
         process.exit(1);
     });
 
-const allowedOrigins = [
-    "http://localhost:5000"
-];
+const app = express();
 
-app.use(cors({
-    credentials: true,
+const whitelist = ['http://localhost:3000']; // list of allowed origins
+const corsOptions = {
     origin: function (origin, callback) {
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-            const msg = `The CORS policy for this site does not allow access from the specified Origin.`;
-            return callback(new Error(msg), false);
+        if (whitelist.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
         }
-        return callback(null, true);
     }
-}));
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-app.use('/api/users', userRoute);  // Use userRoute for '/api/users' endpoint
+app.use('/api/users', userRoute);
 app.use("/api/auth", authRoute);
 
 app.use((err, req, res, next) => {
@@ -53,7 +53,6 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}!`);
 });
