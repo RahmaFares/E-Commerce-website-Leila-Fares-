@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { DropdownContainer, DropdownMenu, DropdownMenuItem, OpenLinksButton, BoldItalicItem } from '../styles/Dropdown.style'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-
 
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,11 +28,15 @@ const Dropdown = () => {
     };
   }, []);
 
+  // Use useSelector to access the cart data from the Redux store
+  const cart = useSelector((state) => state.cart);
+
+  // Check if cart and cart.items are defined before accessing them
+  const totalItemsInCart = cart?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
 
   return (
     <DropdownContainer ref={dropdownRef}>
-      <OpenLinksButton
-        onClick={handleDropdown}> &#8801;</OpenLinksButton>
+      <OpenLinksButton onClick={handleDropdown}> &#8801;</OpenLinksButton>
       <DropdownMenu open={isOpen}>
         <Link to="/register">
           <BoldItalicItem>Login/Sign Up</BoldItalicItem>
@@ -44,7 +48,9 @@ const Dropdown = () => {
         </Link>
         <Link to="/ShoppingCart">
           <BoldItalicItem>
-            <FontAwesomeIcon icon={faShoppingCart} /> Cart
+            <FontAwesomeIcon icon={faShoppingCart} /> Cart({totalItemsInCart > 0 && (
+              <span>{totalItemsInCart}</span>
+            )})
           </BoldItalicItem>
         </Link>
         <DropdownMenuItem href="#">

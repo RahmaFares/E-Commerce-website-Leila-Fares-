@@ -11,9 +11,16 @@ import bgphoto from './assets/images/bgphoto.jpg';
 import Dresses from './Pages/Dresses';
 import Accessories from './Pages/Accessories';
 import DressDetails from './Pages/DressDetails';
-import Wishlist from './Pages/Wishlist';
 import ShoppingCart from './Pages/ShoppingCart';
-import { WishlistProvider } from './WishlistContext';
+import { Provider } from 'react-redux';
+import { store, persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import Wishlist from './Pages/Wishlist';
+import Checkout from './Pages/Checkout';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const AppContainer = styled.div`
   background-image: url(${bgphoto});
@@ -39,27 +46,44 @@ const AppContainer = styled.div`
   }
 `;
 
+const stripePromise = loadStripe('pk_test_51O41GSBr0OR7cHe5TDnAEG1j6LrXLYQbb8Odwgd4yacflm1uHeXalwDBCngBtddeX7Wg3He401oKhqz19aCfeUHo00OJFNDujs');
+
 function App() {
   return (
-    <Router>
-      <WishlistProvider>
-        <AppContainer>
-          <Navbar />
-          <Routes>
-            <Route path="/home" element={<Home />} />
-            <Route path="/news" element={<NewsPage />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/dresses" element={<Dresses />} />
-            <Route path="/accessories" element={<Accessories />} />
-            <Route path="/product/:id" element={<DressDetails />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/ShoppingCart" component={ShoppingCart} />
-          </Routes>
-          <Footer />
-        </AppContainer>
-      </WishlistProvider>
-    </Router>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <AuthProvider>
+            <AppContainer>
+              <Navbar />
+              <Routes>
+                <Route path="/home" element={<Home />} />
+                <Route path="/news" element={<NewsPage />} />
+                <Route path="/contact" element={<ContactUs />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/dresses" element={<Dresses />} />
+                <Route path="/accessories" element={<Accessories />} />
+                <Route path="/product/:id" element={<DressDetails />} />
+                <Route path="/shoppingcart" element={<ProtectedRoute />}>
+                  <Route index element={<ShoppingCart />} />
+                </Route>
+                <Route path="/wishlist" element={<ProtectedRoute />}>
+                  <Route index element={<Wishlist />} />
+                </Route>
+                <Route path="/checkout" element={<ProtectedRoute />}>
+                  <Route index element={
+                    <Elements stripe={stripePromise}>
+                      <Checkout />
+                    </Elements>
+                  } />
+                </Route>
+              </Routes>
+              <Footer />
+            </AppContainer>
+          </AuthProvider>
+        </Router>
+      </PersistGate>
+    </Provider>
   );
 }
 

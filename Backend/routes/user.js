@@ -1,24 +1,17 @@
-const router = require("express").Router();
-const { verifyToken, verifyToken_andAuth } = require("./verifyToken");
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/userController');
 
-//put because we are UPDATING
-router.put("/:id", verifyToken_andAuth, async (req, res) => {
-    if (req.body.password) {
-        //encrpting
-        req.body.password = CryptoJS.AES.encrypt(
-            req.body.password,
-            process.env.PASS_SEC
-        ).toString();
-    }
-    try {
-        const updatedUser = await User.findByAndUpdate(req.params.id, {
-            $set: req.body
-        }, { new: true }
-        );
-        res.status(200).json(updatedUser);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
+// Create a user
+router.post('/user', userController.createUser);
 
-module.exports = router //exporting router
+// Retrieve a user's details
+router.get('/user/:id', userController.getUser);
+
+// Update a user's details
+router.put('/user/:id', userController.updateUser);
+
+// Delete a user
+router.delete('/user/:id', userController.deleteUser);
+
+module.exports = router;

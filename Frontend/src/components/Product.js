@@ -2,7 +2,11 @@ import React, { useCart } from 'react';
 import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useWishlist } from '../WishlistContext';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/Cart/cartSlice';
+import { addToWishlist } from '../redux/Wishlist/wishlistSlice';
+import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Info = styled.div`
     opacity: 0;
@@ -65,11 +69,24 @@ const Icon = styled.div`
 `;
 
 const Product = ({ item }) => {
-  const { addToWishlist } = useWishlist(); // Use the useWishlist hook to get addToWishlist
-  const { addToCart } = useCart(); // Get the addToCart function from the cart context
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    addToCart(item); // Add the item to the cart
+    if (isAuthenticated) {
+      dispatch(addToCart(item));
+    } else {
+      navigate('/register');
+    }
+  };
+
+  const handleAddToWishlist = () => {
+    if (isAuthenticated) {
+      dispatch(addToWishlist(item));
+    } else {
+      navigate('/register');
+    }
   };
 
   return (
@@ -85,7 +102,7 @@ const Product = ({ item }) => {
             <SearchOutlined />
           </Link>
         </Icon>
-        <Icon onClick={() => addToWishlist(item)}>
+        <Icon onClick={handleAddToWishlist}>
           <FavoriteBorderOutlined />
         </Icon>
       </Info>

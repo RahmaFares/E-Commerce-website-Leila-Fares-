@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { WeddingProducts, SoireeProducts, AccessoriesProducts } from '../All_Data';
+import { addToCart } from '../redux/Cart/cartActions';
+import { useDispatch } from 'react-redux';
+import { useAuth } from '../contexts/AuthContext';
 
 const Container = styled.div`
   padding: 20px;
@@ -99,9 +102,18 @@ const AddToCartButton = styled.button`
 `;
 
 const DressDetails = () => {
-  const { id } = useParams(); // Get the id parameter from the URL
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+
+  // Correctly get the dispatch function
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useAuth();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product, quantity));
+    alert(`Added ${quantity} ${product.title} to the cart`);
+  };
 
   useEffect(() => {
     const fetchData = () => {
@@ -158,7 +170,7 @@ const DressDetails = () => {
               <Quantity>{quantity}</Quantity>
               <QuantityButton onClick={() => handleQuantityChange("inc")}>+</QuantityButton>
             </QuantityContainer>
-            <AddToCartButton>Add to Cart</AddToCartButton>
+            {isAuthenticated && <AddToCartButton onClick={handleAddToCart}>Add to Cart</AddToCartButton>}
           </InfoContainer>
         </Wrapper>
       ) : (
