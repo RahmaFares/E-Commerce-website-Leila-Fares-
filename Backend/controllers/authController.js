@@ -113,3 +113,22 @@ exports.resetPassword = async (req, res) => {
         res.status(400).json({ message: 'Invalid token or reset token expired' });
     }
 };
+
+exports.verifyAdmin = (req, res, next) => {
+    const token = req.headers.authorization;
+
+    if (!token) {
+        return res.status(403).send("Token required");
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        if (decoded.isAdmin) {
+            next();
+        } else {
+            res.status(403).send("Access denied. Not an admin.");
+        }
+    } catch (e) {
+        res.status(403).send("Invalid token");
+    }
+};

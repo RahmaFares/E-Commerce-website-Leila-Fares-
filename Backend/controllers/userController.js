@@ -1,15 +1,20 @@
-// exports.getUser = (req, res) => {
-//     // Logic to get user details by req.params.userId
-// };
 
-// exports.updateUser = (req, res) => {
-//     // Logic to update user details by req.params.userId
-// };
+exports.createUser = (req, res) => {
+    // Logic to create user
+};
 
-// exports.deleteUser = (req, res) => {
-//     res.send("Delete user functionality.");
-// };
+exports.getUser = (req, res) => {
+    // Logic to get user details by req.params.userId
+};
 
-// exports.listUsers = (req, res) => {
-//     // Logic to list all users
-// };
+exports.updateUser = (req, res) => {
+    // Logic to update user details by req.params.userId
+};
+
+exports.deleteUser = (req, res) => {
+    res.send("Delete user functionality.");
+};
+
+exports.listUsers = (req, res) => {
+    // Logic to list all users
+};
